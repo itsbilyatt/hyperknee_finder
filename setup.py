@@ -7,7 +7,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name='hyperknee_finder',
+    name='HyperkneeFinder',
     version='0.0.1',
     description='Its about a tool for optimizing two inter-dependent parameters.',
     long_description=long_description,
@@ -15,7 +15,7 @@ setup(
     url='https://github.com/itsbilyatt/hyperknee_finder',
     author='Vincenzo Lavorini',
     author_email='vincenzo.lavorini@protonmail.ch',
-    license='BSD 2-clause',
+    #license='BSD 2-clause',
     packages=['hyperkneefinder'],
     install_requires=[
                       'numpy',
