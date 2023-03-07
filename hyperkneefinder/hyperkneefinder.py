@@ -6,7 +6,7 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import sklearn.linear_model
-%matplotlib ipympl
+# %matplotlib ipympl
 
 
 class HyperkneeFinder:
