@@ -23,6 +23,9 @@ class HyperkneeFinder:
         for i in range(len(self.X)):
             for j in range(len(self.Y)):
                 self.Z[i, j] = np.exp(-(self.X[i])) + np.exp(-(self.Y[j] - 5)) + np.random.rand() / 25
+        
+        self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
+        self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
 
     def plot_data(self):
 
@@ -91,8 +94,8 @@ class HyperkneeFinder:
         return self.factor_x, self.factor_y, self.new_intercept
 
     def visualise1(self):
-        self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
-        self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
+#         self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
+#         self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
 
         self.zp = self.factor_x * self.xp + self.factor_y * self.yp + self.new_intercept
         fig = plt.figure()
