@@ -9,7 +9,7 @@ long_description = (this_directory / "README.md").read_text()
 setup(
     name='hyperknee_finder',
     version='0.0.1',
-    description='It's about a tool for optimizing two inter-dependent parameters.',
+    description='Its about a tool for optimizing two inter-dependent parameters.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/itsbilyatt/hyperknee_finder',
