@@ -94,8 +94,8 @@ class HyperkneeFinder:
         return self.factor_x, self.factor_y, self.new_intercept
 
     def visualise1(self):
-#         self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
-#         self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
+        self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
+        self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
 
         self.zp = self.factor_x * self.xp + self.factor_y * self.yp + self.new_intercept
         fig = plt.figure()
@@ -137,6 +137,8 @@ class HyperkneeFinder:
         print(f"hyper-knee  at {self.X_train[self.knee_point_at]}")
 
     def visualise_hyperknee(self):
+        self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
+        self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         surf = ax.plot_surface(self.XX, self.YY, self.Z, linewidth=1, antialiased=True, alpha=0.5)
