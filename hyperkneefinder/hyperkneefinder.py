@@ -147,7 +147,7 @@ class HyperkneeFinder:
 
         ax.scatter(self.X_train[self.knee_point_at], self.y_train[self.knee_point_at], c='b', s=30,
                    label='knee point')
-        ax.plot_surface(self.xp, self.yp, self.zp, alpha=0.5)
+        ax.plot_surface(self.xs, self.ys, self.zs, alpha=0.5)
         plt.legend()
         plt.show()
 
