@@ -72,7 +72,7 @@ class HyperkneeFinder:
         self.xs = np.tile(np.linspace(self.X[0], self.X[-1], 61), (61, 1))
         self.ys = np.tile(np.linspace(self.Y[0], self.Y[-1], 61), (61, 1)).T
         self.zs = self.xs * self.coefs[0] + self.ys * self.coefs[1] + self.intercept
-        print("Equation: z = {:.2f} + {:.2f}x + {:.2f}y".format(self.intercept, coefs[0], coefs[1]))
+        print("Equation: z = {:.2f} + {:.2f}x + {:.2f}y".format(self.intercept, self.coefs[0], self.coefs[1]))
         ax.plot_surface(self.xs, self.ys, self.zs, alpha=0.5)
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
@@ -147,8 +147,6 @@ class HyperkneeFinder:
 
         ax.scatter(self.X_train[self.knee_point_at], self.y_train[self.knee_point_at], c='b', s=30,
                    label='knee point')
-        ax.plot_surface(self.xs, self.ys, self.zs, alpha=0.5)
+        ax.plot_surface(self.xp, self.yp, self.zp, alpha=0.5)
         plt.legend()
         plt.show()
-
-
