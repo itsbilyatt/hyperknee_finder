@@ -67,11 +67,11 @@ class HyperkneeFinder:
         ax = fig.add_subplot(111, projection='3d')
         surf = ax.plot_surface(self.XX, self.YY, self.Z, cmap=cm.coolwarm,
                                linewidth=1, antialiased=True, alpha=0.8)
-        coefs = self.model.coef_
+        self.coefs = self.model.coef_
         self.intercept = self.model.intercept_
         self.xs = np.tile(np.linspace(self.X[0], self.X[-1], 61), (61, 1))
         self.ys = np.tile(np.linspace(self.Y[0], self.Y[-1], 61), (61, 1)).T
-        self.zs = self.xs * coefs[0] + self.ys * coefs[1] + self.intercept
+        self.zs = self.xs * self.coefs[0] + self.ys * self.coefs[1] + self.intercept
         print("Equation: z = {:.2f} + {:.2f}x + {:.2f}y".format(self.intercept, coefs[0], coefs[1]))
         ax.plot_surface(self.xs, self.ys, self.zs, alpha=0.5)
         ax.set_xlabel('X')
@@ -137,9 +137,6 @@ class HyperkneeFinder:
         # knee_point_at1 =
 
     def visualise_hyperknee(self):
-        self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
-        self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
-        self.zp = self.factor_x * self.xp + self.factor_y * self.yp + self.new_intercept
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         surf = ax.plot_surface(self.XX, self.YY, self.Z, linewidth=1, antialiased=True, alpha=0.5)
