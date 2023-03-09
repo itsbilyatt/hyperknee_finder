@@ -69,9 +69,9 @@ class HyperkneeFinder:
                                linewidth=1, antialiased=True, alpha=0.8)
         coefs = self.model.coef_
         intercept = self.model.intercept_
-        xs = np.tile(np.linspace(self.X[0], self.X[-1], 61), (61, 1))
-        ys = np.tile(np.linspace(self.Y[0], self.Y[-1], 61), (61, 1)).T
-        zs = xs * coefs[0] + ys * coefs[1] + intercept
+        self.xs = np.tile(np.linspace(self.X[0], self.X[-1], 61), (61, 1))
+        self.ys = np.tile(np.linspace(self.Y[0], self.Y[-1], 61), (61, 1)).T
+        self.zs = xs * coefs[0] + ys * coefs[1] + intercept
         print("Equation: z = {:.2f} + {:.2f}x + {:.2f}y".format(intercept, coefs[0], coefs[1]))
         ax.plot_surface(xs, ys, zs, alpha=0.5)
         ax.set_xlabel('X')
