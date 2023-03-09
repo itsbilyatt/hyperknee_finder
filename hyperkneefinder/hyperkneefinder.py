@@ -82,16 +82,16 @@ class HyperkneeFinder:
     def translate_plane(self):
         self.v_n = np.array([self.model.coef_[0], self.model.coef_[1], -1])
         p0 = [self.X[0], self.Y[0], self.Z[0, 0]]
-        ps_intercept = np.sum(self.v_n * p0)
+        self.ps_intercept = np.sum(self.v_n * p0)
         self.factor_x = self.model.coef_[0]
         self.factor_y = self.model.coef_[1]
-        self.new_intercept = -ps_intercept
+        self.new_intercept = -self.ps_intercept
 
         print(
             "Equation of the plane in normal form: {:.2f}x + {:.2f}y + {:.2f} = z".format(self.factor_x, self.factor_y,
                                                                                           self.new_intercept))
 
-        return self.factor_x, self.factor_y, self.new_intercept
+#         return self.factor_x, self.factor_y, self.new_intercept
 
     def visualise1(self):
         self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
@@ -148,7 +148,7 @@ class HyperkneeFinder:
         ax.set_ylabel("X2")
         ax.set_zlabel("y")
 
-        ax.scatter(self.X_train[self.knee_point_at], self.y_train[self.knee_point_at], c='b', s=30,
+        ax.scatter(self.*X_train[self.knee_point_at], self.y_train[self.knee_point_at], c='b', s=30,
                    label='knee point')
         ax.plot_surface(self.xp, self.yp, self.zp, alpha=0.5)
         plt.legend()
