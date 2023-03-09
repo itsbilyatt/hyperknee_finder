@@ -6,6 +6,8 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import sklearn.linear_model
+
+
 # %matplotlib ipympl
 
 
@@ -16,6 +18,7 @@ class HyperkneeFinder:
     """
 
     def __init__(self, start_x, end_x, step_x, start_y, end_y, step_y):
+
         
         self.X = np.arange(start_x, end_x, step_x)
         self.Y = np.arange(start_y, end_y, step_y)
@@ -23,7 +26,7 @@ class HyperkneeFinder:
         for i in range(len(self.X)):
             for j in range(len(self.Y)):
                 self.Z[i, j] = np.exp(-(self.X[i])) + np.exp(-(self.Y[j] - 5)) + np.random.rand() / 25
-        
+
         self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
         self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
 #         self.zp = self.factor_x * self.xp + self.factor_y * self.yp + self.new_intercept
@@ -49,12 +52,9 @@ class HyperkneeFinder:
         self.y_train = self.Z.flatten()
 
         return self.X_train, self.y_train
-    
-    
-    
 
     def fit_model(self):
-#         self.X_train, self.y_train = self.reshape_data()
+        #         self.X_train, self.y_train = self.reshape_data()
         self.model = sklearn.linear_model.LinearRegression()
         return self.model.fit(self.X_train, self.y_train)
 
@@ -73,16 +73,15 @@ class HyperkneeFinder:
         self.ys = np.tile(np.linspace(self.Y[0], self.Y[-1], 61), (61, 1)).T
         self.zs = self.xs * coefs[0] + self.ys * coefs[1] + self.intercept
         print("Equation: z = {:.2f} + {:.2f}x + {:.2f}y".format(self.intercept, coefs[0], coefs[1]))
-        ax.plot_surface(self.xs, self.ys,self.zs, alpha=0.5)
+        ax.plot_surface(self.xs, self.ys, self.zs, alpha=0.5)
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
         plt.show()
 
     def translate_plane(self):
-
-        p0 = [self.X[0], self.Y[0], self.Z[0, 0]]
         self.v_n = np.array([self.model.coef_[0], self.model.coef_[1], -1])
+        p0 = [self.X[0], self.Y[0], self.Z[0, 0]]
         ps_intercept = np.sum(self.v_n * p0)
         self.factor_x = self.model.coef_[0]
         self.factor_y = self.model.coef_[1]
@@ -122,12 +121,11 @@ class HyperkneeFinder:
         dist_2 = self.y_train * self.v_n[2]
 
         dist_comb = np.concatenate((dist_1, np.expand_dims(dist_2, axis=1)), axis=1)
-        dist_tot = np.abs(np.sum(dist_comb, axis=1) + self.new_intercept)
+        self.dist_tot = np.abs(np.sum(dist_comb, axis=1) + self.new_intercept)
 
-        return dist_tot
 
     def max_dist_from_plane(self):
-        self.dist_tot = self.cal_distance()
+        # self.dist_tot = self.cal_distance()
 
         self.knee_point_at = np.argmax(self.dist_tot)
 
@@ -136,6 +134,7 @@ class HyperkneeFinder:
     def hyperkneepoint(self):
 
         print(f"hyper-knee  at {self.X_train[self.knee_point_at]}")
+        # knee_point_at1 =
 
     def visualise_hyperknee(self):
         self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
@@ -154,5 +153,5 @@ class HyperkneeFinder:
         ax.plot_surface(self.xp, self.yp, self.zp, alpha=0.5)
         plt.legend()
         plt.show()
-        
+
 
