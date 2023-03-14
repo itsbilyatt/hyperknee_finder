@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
+from typing import Union
 import sklearn.linear_model
 
 
@@ -14,18 +15,17 @@ import sklearn.linear_model
 class HyperkneeFinder:
     """
     hyperKnee point finder.
-    It's about a tool for optimizing two inter-dependent parameters
+    TIt's about a tool for optimizing two inter-dependent parameters
     """
 
-    def __init__(self, start_x, end_x, step_x, start_y, end_y, step_y):
-
-        self.X = np.arange(start_x, end_x, step_x)
-        self.Y = np.arange(start_y, end_y, step_y)
-        self.Z = np.zeros((len(self.X), len(self.Y)))
-        for i in range(len(self.X)):
-            for j in range(len(self.Y)):
-                self.Z[i, j] = np.exp(-(self.X[i])) + np.exp(-(self.Y[j] - 5)) + np.random.rand() / 25
-
+    def __init__(self, data_x: Union[list, np.ndarray], data_y: Union[list, np.ndarray], data_z: Union[list, np.ndarray]):
+        if len(data_x) != len(data_y) or len(data_x) != len(data_z) or len(data_y) != len(data_z):
+            raise ValueError("Input arrays must be of the same length.")
+            
+        self.X = data_x
+        self.Y = data_y
+        self.Z = data_z
+     
     #         self.xp = np.tile(np.linspace(1, 5, 61), (61, 1))
     #         self.yp = np.tile(np.linspace(6, 10, 61), (61, 1)).T
     # #         self.zp = self.factor_x * self.xp + self.factor_y * self.yp + self.new_intercept
@@ -185,5 +185,3 @@ class HyperkneeFinder:
         ax.plot_surface(xp, yp, zp, alpha=0.5)
         plt.legend()
         plt.show()
-
-
